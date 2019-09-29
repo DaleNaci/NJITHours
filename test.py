@@ -1,7 +1,8 @@
-from flask import Flask, render_template, url_for
-import csv
+# FILE ONLY FOR PRODUCTION.
+# REMOVE THIS FILE BEFORE DEPLOYMENT.
 
-app = Flask(__name__)
+import csv
+import pprint # Prettifies json objects
 
 hoursList = []
 
@@ -21,10 +22,5 @@ with open('static/data/hours.csv') as hoursFile:
         }
         hoursList.append(venue)
 
-
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-if __name__ == "__main__":
-    app.run(debug=True)
+for venue in hoursList:
+    pprint.PrettyPrinter(indent=4).pprint(venue)
