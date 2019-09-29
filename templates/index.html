@@ -10,7 +10,20 @@
 </nav>
 <div class="content">
     {% for venue in venues %}
-        <p> {{ venue["name"] }} </p>
+        <h2> {{ venue["name"] }} </h2>
+        <p> Sunday: {{ venue["sunday"] }}
+        <br>
+        <p> Monday: {{ venue["monday"] }}
+        <br>
+        <p> Tuesday: {{ venue["tuesday"] }}
+        <br>
+        <p> Wednesday: {{ venue["wednesday"] }}
+        <br>
+        <p> Thursday: {{ venue["thursday"] }}
+        <br>
+        <p> Friday: {{ venue["friday"] }}
+        <br>
+        <p> Saturday: {{ venue["saturday"] }}
         <br>
     {% endfor %}
 </div>
