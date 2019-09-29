@@ -8,7 +8,7 @@
 <nav class="navbar">
   <a class="navbar-brand">NJIT Hours</a>
 </nav>
-<div class="content">
+<main id="home">
     {% for venue in venues %}
         <h2> {{ venue["name"] }} </h2>
         <p> Sunday: {{ venue["sunday"] }}
@@ -26,5 +26,5 @@
         <p> Saturday: {{ venue["saturday"] }}
         <br>
     {% endfor %}
-</div>
+</main>
 {% endblock %}
