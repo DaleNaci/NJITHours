@@ -8,5 +8,10 @@
 <nav class="navbar">
   <a class="navbar-brand">NJIT Hours</a>
 </nav>
-<!-- < h1>Hello, World!</h1> -->
+<div class="content">
+    {% for venue in venues %}
+        <p> {{ venue["name"] }} </p>
+        <br>
+    {% endfor %}
+</div>
 {% endblock %}

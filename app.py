@@ -3,7 +3,7 @@ import csv
 
 app = Flask(__name__)
 
-hoursList = []
+hoursList = [] # Might rename variable
 
 with open('static/data/hours.csv') as hoursFile:
     next(hoursFile)
@@ -24,7 +24,7 @@ with open('static/data/hours.csv') as hoursFile:
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', venues=hoursList)
 
 if __name__ == "__main__":
     app.run(debug=True)

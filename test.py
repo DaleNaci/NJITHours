@@ -2,7 +2,7 @@
 # REMOVE THIS FILE BEFORE DEPLOYMENT.
 
 import csv
-import pprint # Prettifies json objects
+import pprint # Prettifies dictionaries
 
 hoursList = []
 
