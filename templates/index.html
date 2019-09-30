@@ -8,23 +8,28 @@
 <nav class="navbar">
   <a class="navbar-brand">NJIT Hours</a>
 </nav>
-<main id="home">
-    {% for venue in venues %}
-        <h2> {{ venue["name"] }} </h2>
-        <p> Sunday: {{ venue["sunday"] }}
-        <br>
-        <p> Monday: {{ venue["monday"] }}
-        <br>
-        <p> Tuesday: {{ venue["tuesday"] }}
-        <br>
-        <p> Wednesday: {{ venue["wednesday"] }}
-        <br>
-        <p> Thursday: {{ venue["thursday"] }}
-        <br>
-        <p> Friday: {{ venue["friday"] }}
-        <br>
-        <p> Saturday: {{ venue["saturday"] }}
-        <br>
+<div id="home">
+    {% for i in range((venues|length // 3) + 1) %}
+        {% if i == venues|length // 3 %}
+            {% set jCounter = venues|length - (i * 3) %}
+        {% else %}
+            {% set jCounter = 3 %}
+        {% endif %}
+        <div class="row">
+        {% for j in range(jCounter) %}
+            <div class="col-4">
+                {% set venue = venues[(i * 3) + j] %}
+                <h3> {{ venue["name"] }} </h3>
+                <p>SUN: <span style="float:right;">{{ venue["sunday"] }}</span></p>
+                <p>MON: <span style="float:right;">{{ venue["monday"] }}</span></p>
+                <p>TUES: <span style="float:right;">{{ venue["tuesday"] }}</span></p>
+                <p>WED: <span style="float:right;">{{ venue["wednesday"] }}</span></p>
+                <p>THURS: <span style="float:right;">{{ venue["thursday"] }}</span></p>
+                <p>FRI: <span style="float:right;">{{ venue["friday"] }}</span></p>
+                <p>SAT: <span style="float:right;">{{ venue["saturday"] }}</span></p>
+            </div>
+        {% endfor %}
+        </div>
     {% endfor %}
-</main>
+</div>
 {% endblock %}
