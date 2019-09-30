@@ -5,9 +5,9 @@ app = Flask(__name__)
 
 hoursList = [] # Might rename variable
 
-with open('static/data/hours.csv') as hoursFile:
-    next(hoursFile)
-    csvReader = csv.reader(hoursFile, delimiter=',')
+with open('static/data/hours.csv') as hoursCSV:
+    next(hoursCSV)
+    csvReader = csv.reader(hoursCSV, delimiter=',')
     for row in csvReader:
         venue = {
             "name": row[0],
