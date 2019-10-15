@@ -9,16 +9,29 @@
   <a class="navbar-brand">NJIT Hours</a>
 </nav>
 <div id="home">
-    {% for i in range((venues|length // 3) + 1) %}
-        {% if i == venues|length // 3 %}
-            {% set jCounter = venues|length - (i * 3) %}
+    <div id="searchBar">
+        <div class="active-pink-3 active-pink-4 mb-4">
+            <input class="form-control" type="text" placeholder="Search" name="Search" aria-label="Search" value="{{ searchInput }}">
+        </div>
+    </div>
+    <div class="row">
+    {% for j in range(venues|length) %}
+        {% set venue = venues[j] %}
+        {% if searchInput is defined %}
+            {% if searchInput in venue["name"] %}
+                <div class="venue col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <h3> {{ venue["name"] }} </h3>
+                    <p>SUN: <span style="float:right;">{{ venue["sunday"] }}</span></p>
+                    <p>MON: <span style="float:right;">{{ venue["monday"] }}</span></p>
+                    <p>TUES: <span style="float:right;">{{ venue["tuesday"] }}</span></p>
+                    <p>WED: <span style="float:right;">{{ venue["wednesday"] }}</span></p>
+                    <p>THURS: <span style="float:right;">{{ venue["thursday"] }}</span></p>
+                    <p>FRI: <span style="float:right;">{{ venue["friday"] }}</span></p>
+                    <p>SAT: <span style="float:right;">{{ venue["saturday"] }}</span></p>
+                </div>
+            {% endif %}
         {% else %}
-            {% set jCounter = 3 %}
-        {% endif %}
-        <div class="row">
-        {% for j in range(jCounter) %}
-            <div class="col-4">
-                {% set venue = venues[(i * 3) + j] %}
+            <div class="venue col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
                 <h3> {{ venue["name"] }} </h3>
                 <p>SUN: <span style="float:right;">{{ venue["sunday"] }}</span></p>
                 <p>MON: <span style="float:right;">{{ venue["monday"] }}</span></p>
@@ -28,8 +41,8 @@
                 <p>FRI: <span style="float:right;">{{ venue["friday"] }}</span></p>
                 <p>SAT: <span style="float:right;">{{ venue["saturday"] }}</span></p>
             </div>
-        {% endfor %}
-        </div>
+        {% endif %}
     {% endfor %}
+    </div>
 </div>
 {% endblock %}
