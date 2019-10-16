@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request
 import csv
 
 app = Flask(__name__)
@@ -24,7 +24,6 @@ with open('static/data/hours.csv') as hoursCSV:
 
 @app.route('/')
 def index():
-
     return render_template('index.html', venues=hoursList)
 
 if __name__ == "__main__":
