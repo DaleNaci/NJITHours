@@ -11,42 +11,52 @@
 <div id="home">
     <div id="searchBar">
         <div class="active-pink-3 active-pink-4 mb-4">
-            <input class="form-control" type="text" placeholder="Search" name="Search" aria-label="Search" value="{{ searchInput }}">
+            <form method="POST" action="/search">
+                <input class="form-control" id="search-bar" type="text" placeholder="Search" name="Search" aria-label="Search">
+            </form>
         </div>
     </div>
-    <div class="row">
-        {% for j in range(venues|length) %}
-            {% set venue = venues[j] %}
-            {% if searchInput is defined %}
-                {% if searchInput in venue["name"] %}
-                    <div class="venue col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                        <h3> {{ venue["name"] }} </h3>
-                        <p>SUN: <span>{{ venue["sunday"] }}</span></p>
-                        <p>MON: <span>{{ venue["monday"] }}</span></p>
-                        <p>TUES: <span>{{ venue["tuesday"] }}</span></p>
-                        <p>WED: <span>{{ venue["wednesday"] }}</span></p>
-                        <p>THURS: <span>{{ venue["thursday"] }}</span></p>
-                        <p>FRI: <span>{{ venue["friday"] }} </span></p>
-                        <p>SAT: <span>{{ venue["saturday"] }}</span></p>
-                    </div>
-                {% endif %}
-            {% else %}
-                <div class="venue col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                    <h3> {{ venue["name"] }} </h3>
-                    <p>SUN: <span>{{ venue["sunday"] }}</span></p>
-                    <p>MON: <span>{{ venue["monday"] }}</span></p>
-                    <p>TUES: <span>{{ venue["tuesday"] }}</span></p>
-                    <p>WED: <span>{{ venue["wednesday"] }}</span></p>
-                    <p>THURS: <span>{{ venue["thursday"] }}</span></p>
-                    <p>FRI: <span>{{ venue["friday"] }}</span></p>
-                    <p>SAT: <span>{{ venue["saturday"] }}</span></p>
-                </div>
-            {% endif %}
-        {% endfor %}
+    <div class="row" id="venue-list">
+
     </div>
 </div>
 <script>
-console.log("Hello")
-console.log("searchInput: ", {{ searchInput }})
+    document.getElementById("search-bar").addEventListener("keyup", function() {
+        search();
+    });
+    function search() {
+        let input = document.getElementById("search-bar").value.toLowerCase();
+        document.getElementById("venue-list").innerHTML = "";
+        {% for i in range(venues|length) %}
+            var venue = document.createElement("div");
+            {% set venue = venues[i] %}
+            if (input.length == 0) {
+                venue.setAttribute("class", "venue col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-3");
+                venue.innerHTML = "<h3> {{ venue['name'] }} </h3>";
+                venue.innerHTML += "<p>SUN: <span>{{ venue['sunday'] }}</span></p>";
+                venue.innerHTML += "<p>MON: <span>{{ venue['monday'] }}</span></p>";
+                venue.innerHTML += "<p>TUES: <span>{{ venue['tuesday'] }}</span></p>";
+                venue.innerHTML += "<p>WED: <span>{{ venue['wednesday'] }}</span></p>";
+                venue.innerHTML += "<p>THURS: <span>{{ venue['thursday'] }}</span></p>";
+                venue.innerHTML += "<p>FRI: <span>{{ venue['friday'] }}</span></p>";
+                venue.innerHTML += "<p>SAT: <span>{{ venue['saturday'] }}</span></p>";
+                document.getElementById("venue-list").appendChild(venue);
+            } else {
+                if ("{{ venue['name'] }}".toLowerCase().indexOf(input) >= 0) {
+                    venue.setAttribute("class", "venue col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-3");
+                    venue.innerHTML = "<h3> {{ venue['name'] }} </h3>";
+                    venue.innerHTML += "<p>SUN: <span>{{ venue['sunday'] }}</span></p>";
+                    venue.innerHTML += "<p>MON: <span>{{ venue['monday'] }}</span></p>";
+                    venue.innerHTML += "<p>TUES: <span>{{ venue['tuesday'] }}</span></p>";
+                    venue.innerHTML += "<p>WED: <span>{{ venue['wednesday'] }}</span></p>";
+                    venue.innerHTML += "<p>THURS: <span>{{ venue['thursday'] }}</span></p>";
+                    venue.innerHTML += "<p>FRI: <span>{{ venue['friday'] }}</span></p>";
+                    venue.innerHTML += "<p>SAT: <span>{{ venue['saturday'] }}</span></p>";
+                    document.getElementById("venue-list").appendChild(venue);
+                }
+            }
+        {% endfor %}
+    }
+    search();
 </script>
 {% endblock %}
