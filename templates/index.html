@@ -12,7 +12,7 @@
     <div id="searchBar">
         <div class="active-pink-3 active-pink-4 mb-4">
             <form method="POST" action="/search">
-                <input class="form-control" id="search-bar" type="text" placeholder="Search" name="Search" aria-label="Search">
+                <input class="form-control" id="search-bar" type="text" placeholder="Search" name="Search" aria-label="Search" onkeypress="return event.keyCode != 13;">
             </form>
         </div>
     </div>
@@ -32,6 +32,7 @@
             {% set venue = venues[i] %}
             if (input.length == 0) {
                 venue.setAttribute("class", "venue col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-3");
+                venue.style.border = "1px solid #d12421";
                 venue.innerHTML = "<h3> {{ venue['name'] }} </h3>";
                 venue.innerHTML += "<p>SUN: <span>{{ venue['sunday'] }}</span></p>";
                 venue.innerHTML += "<p>MON: <span>{{ venue['monday'] }}</span></p>";
@@ -44,6 +45,7 @@
             } else {
                 if ("{{ venue['name'] }}".toLowerCase().indexOf(input) >= 0) {
                     venue.setAttribute("class", "venue col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-3");
+                    venue.style.border = "1px solid #d12421";
                     venue.innerHTML = "<h3> {{ venue['name'] }} </h3>";
                     venue.innerHTML += "<p>SUN: <span>{{ venue['sunday'] }}</span></p>";
                     venue.innerHTML += "<p>MON: <span>{{ venue['monday'] }}</span></p>";
