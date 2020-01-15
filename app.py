@@ -1,11 +1,17 @@
-from flask import Flask, render_template, url_for, request
 import csv
+import os
+
+from flask import Flask, render_template, url_for, request
+
 
 app = Flask(__name__)
 
 hoursList = [] # Might rename variable
 
-with open('static/data/hours.csv') as hoursCSV:
+currentFolder = os.path.dirname(os.path.abspath(__file__))
+csvFile = os.path.join(currentFolder, "static/data/hours.csv")
+
+with open(csvFile) as hoursCSV:
     next(hoursCSV)
     csvReader = csv.reader(hoursCSV, delimiter=',')
     for row in csvReader:
