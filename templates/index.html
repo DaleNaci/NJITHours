@@ -12,7 +12,7 @@
     <div id="searchBar">
         <div class="active-pink-3 active-pink-4 mb-4">
             <form method="POST" action="/search">
-                <input class="form-control" id="search-bar" type="text" placeholder="Search" name="Search" aria-label="Search" onkeypress="return event.keyCode != 13;">
+                <input class="form-control" id="search-bar" type="text" placeholder="Search" name="Search" aria-label="Search" onkeypress="blurIfEnter(event); return event.keyCode != 13;">
             </form>
         </div>
     </div>
@@ -59,6 +59,12 @@
             }
         {% endfor %}
     }
+    function blurIfEnter(event) {
+        if (event.keyCode == 13) {
+            document.activeElement.blur();
+        }
+    }
     search();
+
 </script>
 {% endblock %}
